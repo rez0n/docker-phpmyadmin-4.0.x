@@ -1,0 +1,24 @@
+name: Build image
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and publish on Github
+        uses: elgohr/Publish-Docker-Github-Action@master
+        env:
+          PMA_VERSION: "4.0.10.20"
+        with:
+         name: rez0n/phpmyadmin-4.0.x
+         registry: ghcr.io
+         username: "rez0n"
+         password: ${{ secrets.PAT }}
+         dockerfile: Dockerfile
+         buildargs: PMA_VERSION
+         tags: latest, ${{ PMA_VERSION }}

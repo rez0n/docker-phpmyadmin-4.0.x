@@ -1,0 +1,33 @@
+# docker-compose for local building, debugging and testing
+
+version: '3.1'
+
+networks:
+  pma:
+
+services:
+  db:
+    image: vsamov/mysql-5.1.73
+    restart: always
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+    networks:
+      - pma
+
+  phpmyadmin:
+    depends_on:
+      - db
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PMA_HOST: db
+      PMA_ABSOLUTE_URI: "http://localhost:8080"
+      UPLOAD_LIMIT: 1G
+    ports:
+      - "8080:80"
+    networks:
+      - pma
