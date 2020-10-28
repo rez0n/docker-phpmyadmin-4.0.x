@@ -21,4 +21,4 @@ jobs:
          password: ${{ secrets.PAT }}
          dockerfile: Dockerfile
          buildargs: PMA_VERSION
-         tags: latest, ${{ PMA_VERSION }}
+         tags: latest, ${{ env.PMA_VERSION }}
