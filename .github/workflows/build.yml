@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build and publish on Github
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         env:
           PMA_VERSION: "4.0.10.20"
         with:
